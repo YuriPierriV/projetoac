@@ -45,7 +45,7 @@ void logo(){
 };
 
 void impCliente(Cliente C){
-	printf("ID=%d  Nome=%s %s  Idade=%d  Cpf=%d  Estado=%s",C.id,C.primeiroNome,C.segundoNome,C.idade,C.cpf,C.estado);
+	printf("ID=%d  Nome=%s %s   Idade=%d  Cpf=%d  Estado=%s",C.id,C.primeiroNome,C.segundoNome,C.idade,C.cpf,C.estado);
 }
 int tabelaInicial(int opcao){
 	printf("\t\t _____________________________\n");
@@ -123,23 +123,7 @@ int subTabelaCp(int opcao){
 
 int main(){
 	setlocale(LC_ALL,"portuguese");
-	Cliente teste;
-	char primeiroNome[50],segundoNome[50],estado[50];
-	int idade,cpf,id;
-	//printf("Nome:");
-	//gets(primeiroNome);
-	//printf("Sobrenome:");
-	//gets(segundoNome);
-	//printf("Estado:");
-	//gets(estado);
-	printf("Idade:");
-	scanf("%d",&idade);
-	printf("Cpf:");
-	scanf("%d",&cpf);
-	printf("id:");
-	scanf("%d",id);
-	teste = setCliente(id,primeiroNome,segundoNome,idade,cpf,estado);
-	impCliente(teste);
+	
 	getch();
 	
 	
