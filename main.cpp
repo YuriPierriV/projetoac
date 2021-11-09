@@ -26,15 +26,17 @@ Cliente setCliente(int id,char primeiroNome[50],char segundoNome[50],int idade,i
 }
 
 struct Produto{
-	char id[5];
-	char nomeProduto;
+	int id;
+	char nomeProduto[50];
+	int preco;
 	int quantidade;
 };
 
-Produto setProduto(char id[5],char nomeProduto,int quantidade){
+Produto setProduto(int id,char nomeProduto[50],int preco,int quantidade){
 	Produto P;
-	P.id[5] = id[5];
-	P.nomeProduto = nomeProduto;
+	P.id = id;
+	P.nomeProduto[50] = nomeProduto[50];
+	P.preco = preco;
 	P.quantidade = quantidade;
 	return P;
 }
@@ -46,6 +48,10 @@ void logo(){
 
 void impCliente(Cliente C){
 	printf("ID=%d  Nome=%s %s   Idade=%d  Cpf=%d  Estado=%s",C.id,C.primeiroNome,C.segundoNome,C.idade,C.cpf,C.estado);
+}
+
+void impProduto(Produto P){
+	printf("ID=%d  Produto=%s  Preço=%d  Quantidade=%d",P.id,P.nomeProduto,P.preco,P.quantidade);
 }
 int tabelaInicial(int opcao){
 	printf("\t\t _____________________________\n");
@@ -59,7 +65,6 @@ int tabelaInicial(int opcao){
 	printf("\t\t|                             |\n");
 	printf("\t\t|           Opção: ");
 	scanf("%d",opcao);
-	printf("%d",opcao);
 	system("cls");
 	return opcao;
 };
@@ -78,7 +83,6 @@ int subTabelaClientes(int opcao){
 	printf("\t\t|                             |\n");
 	printf("\t\t|           Opção: ");
 	scanf("%d",opcao);
-	printf("%d",opcao);
 	system("cls");
 	return opcao;
 };
@@ -97,7 +101,6 @@ int subTabelaProdutos(int opcao){
 	printf("\t\t|                             |\n");
 	printf("\t\t|           Opção: ");
 	scanf("%d",opcao);
-	printf("%d",opcao);
 	system("cls");
 	return opcao;
 };
