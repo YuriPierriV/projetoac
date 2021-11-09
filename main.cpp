@@ -6,22 +6,22 @@
 #include <conio.h>
 
 struct Cliente{
-	char id[5];
+	int id;
 	char primeiroNome[50];
 	char segundoNome[50];
 	int idade;
-	char cpf[11];
+	int cpf;
 	char estado[50];
 };
 
-Cliente setClient(char id[5],char primeiroNome[50],char segundoNome[50],int idade,char cpf[11],char estado[50]){
+Cliente setCliente(int id,char primeiroNome[50],char segundoNome[50],int idade,int cpf,char estado[50]){
 	Cliente C;
-	C.id[5] = id;
-	C.primeiroNome = primeiroNome;
-	C.segundoNome = segundoNome;
+	C.id = id;
+	C.primeiroNome[50] = primeiroNome[50];
+	C.segundoNome[50] = segundoNome[50];
 	C.idade = idade;
 	C.cpf = cpf;
-	C.estado = estado;
+	C.estado[50] = estado[50];
 	return C;
 }
 
@@ -33,7 +33,10 @@ struct Produto{
 
 Produto setProduto(char id[5],char nomeProduto,int quantidade){
 	Produto P;
-	P.id[5] =
+	P.id[5] = id[5];
+	P.nomeProduto = nomeProduto;
+	P.quantidade = quantidade;
+	return P;
 }
 
 void logo(){
@@ -41,6 +44,9 @@ void logo(){
 	
 };
 
+void impCliente(Cliente C){
+	printf("ID=%d  Nome=%s %s  Idade=%d  Cpf=%d  Estado=%s",C.id,C.primeiroNome,C.segundoNome,C.idade,C.cpf,C.estado);
+}
 int tabelaInicial(int opcao){
 	printf("\t\t _____________________________\n");
 	printf("\t\t|       Sistema de dados      |\n");
@@ -117,7 +123,24 @@ int subTabelaCp(int opcao){
 
 int main(){
 	setlocale(LC_ALL,"portuguese");
-	
+	Cliente teste;
+	char primeiroNome[50],segundoNome[50],estado[50];
+	int idade,cpf,id;
+	//printf("Nome:");
+	//gets(primeiroNome);
+	//printf("Sobrenome:");
+	//gets(segundoNome);
+	//printf("Estado:");
+	//gets(estado);
+	printf("Idade:");
+	scanf("%d",&idade);
+	printf("Cpf:");
+	scanf("%d",&cpf);
+	printf("id:");
+	scanf("%d",id);
+	teste = setCliente(id,primeiroNome,segundoNome,idade,cpf,estado);
+	impCliente(teste);
+	getch();
 	
 	
 	
