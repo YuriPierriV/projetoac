@@ -61,12 +61,10 @@ int tabelaInicial(int opcao){
 	printf("\t\t|                             |\n");
 	printf("\t\t|   2  ->    Produtos         |\n");
 	printf("\t\t|                             |\n");
-	printf("\t\t|   3  ->  Compras/Vendas     |\n");
-	printf("\t\t|                             |\n");
-	printf("\t\t|   4  ->  Fechar sistema     |\n");
+	printf("\t\t|   3  ->  Compra/Vendas      |\n");
 	printf("\t\t|                             |\n");
 	printf("\t\t|           Opção: ");
-	scanf("%d",&opcao);
+	scanf("%d",opcao);
 	system("cls");
 	return opcao;
 };
@@ -83,10 +81,8 @@ int subTabelaClientes(int opcao){
 	printf("\t\t|                             |\n");
 	printf("\t\t|   4  ->    Deletar          |\n");
 	printf("\t\t|                             |\n");
-	printf("\t\t|   5  ->    Voltar Menu      |\n");
-	printf("\t\t|                             |\n");
 	printf("\t\t|           Opção: ");
-	scanf("%d",&opcao);
+	scanf("%d",opcao);
 	system("cls");
 	return opcao;
 };
@@ -103,10 +99,8 @@ int subTabelaProdutos(int opcao){
 	printf("\t\t|                             |\n");
 	printf("\t\t|   4  ->    Deletar          |\n");
 	printf("\t\t|                             |\n");
-	printf("\t\t|   5  ->    Voltar Menu      |\n");
-	printf("\t\t|                             |\n");
 	printf("\t\t|           Opção: ");
-	scanf("%d",&opcao);
+	scanf("%d",opcao);
 	system("cls");
 	return opcao;
 };
@@ -123,10 +117,8 @@ int subTabelaCp(int opcao){
 	printf("\t\t|                             |\n");
 	printf("\t\t|   4  ->    Deletar          |\n");
 	printf("\t\t|                             |\n");
-	printf("\t\t|   5  ->    Voltar Menu      |\n");
-	printf("\t\t|                             |\n");
 	printf("\t\t|           Opção: ");
-	scanf("%d",&opcao);
+	scanf("%d",opcao);
 	system("cls");
 	return opcao;
 	
@@ -134,86 +126,8 @@ int subTabelaCp(int opcao){
 
 int main(){
 	setlocale(LC_ALL,"portuguese");
-	int opcao;
-	bool inicial,subs;
-	inicial=true;
-	subs=true;
-	while(inicial){
-		switch(tabelaInicial(opcao)){
-			case 1:
-				subs=true;
-				while(subs){
-					switch(subTabelaClientes(opcao)){
-						case 1:
-							printf("cadastrar");
-							break;
-						case 2:
-							printf("Listar");
-							break;
-						case 3:
-							printf("Atualizar");
-							break;
-						case 4:
-							printf("Deletar");
-							break;
-						case 5:
-							subs=false;
-							break;
-					};
-				}
-				break;
-			case 2:
-				subs=true;
-				while(subs){
-					switch(subTabelaProdutos(opcao)){
-						case 1:
-							printf("cadastrar");
-							break;
-						case 2:
-							printf("Listar");
-							break;
-						case 3:
-							printf("Atualizar");
-							break;
-						case 4:
-							printf("Deletar");
-							break;
-						case 5:
-							subs=false;
-							break;
-					};
-				}
-				break;
-			case 3:
-				subs=true;
-				while(subs){
-					switch(subTabelaCp(opcao)){
-						case 1:
-							printf("cadastrar");
-							break;
-						case 2:
-							printf("Listar");
-							break;
-						case 3:
-							printf("Atualizar");
-							break;
-						case 4:
-							printf("Deletar");
-							break;
-						case 5:
-							subs=false;
-							break;
-					};
-				}
-				break;
-			case 4:
-				inicial=false;
-				printf("error");
-				break;
-		}
-	}
-		
 	
+	getch();
 	
 	
 	
