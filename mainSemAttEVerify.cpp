@@ -360,7 +360,7 @@ void listarCv(){
 		while(aux != EOF){
 			i = i+1;
 			printf("\t\t|___________________________________________________________________________|\n");
-			printf("\t\t|ID do cliente:%d | ID do produto:%d | Quantidade Comprada:%d | ID da compra:%d|\n",idCliente,idProduto,quantidade,id);
+			printf("\t\t|ID cliente:%d | ID produto:%d | Quantidade Comprada:%d | ID compra:%d|\n",idCliente,idProduto,quantidade,id);
 			printf("\t\t|___________________________________________________________________________|\n");
 			aux = fscanf(vendas,"%d %d %d %d",&id,&idCliente,&idProduto,&quantidade);
 		}
@@ -447,9 +447,8 @@ void cadastroCv(CompraVenda novo){
 }
 
 void quadroAtualizar(){
-	printf("\t\t _____________________________\n");
-	printf("\t\t|      Atualizar dados        |\n");
-	printf("\t\t|                             |\n");
+	printf("\t\t _____________________________________________________________\n");
+	printf("\t\t|                      Atualizar dados                        |\n");
 }
 
 int quadroAtualizarClienteTal(int idCliente){
@@ -495,8 +494,63 @@ int quadroAtualizarProdutoTal(int idProduto){
 }
 
 void atualizarCliente(){
+	char primeiroNome[50],segundoNome[50],cidade[50],newPrimeiroNome[50],newSegundoNome[50],newCidade[50];
+	int id,idade,opcao,idClienteSelect,newIdade,aux1,i;
+	system("cls");
+	quadroAtualizar();
+	listarClientes();
+	printf("\t\tSelecione o id do cliente que deseja atualizar:");
+	scanf("%d",&idClienteSelect);
+	switch(quadroAtualizarClienteTal(idClienteSelect)){
+		case 1:
+			quadroAtualizar();
+			printf("\t\tQual o novo nome:");
+			scanf("%s",&newPrimeiroNome);
+			FILE *cliente;
+			FILE *reup;
+			cliente = fopen("Clientes.txt","r");
+			reup = fopen("Cliente.txt","w");
+			if(cliente == NULL){
+				printf("Erro para atualizar arquivo");
+			}
+			else{
+				i=1;
+				aux1 = fscanf(cliente,"%s %s %s %d %d\n",&primeiroNome,&segundoNome,&cidade,&idade,&id);
+			while( aux1 != EOF){
+				if(idClienteSelect = i){
+					fprintf(reup,"%s %s %s %d %d\n",newPrimeiroNome,segundoNome,cidade,idade,id);
+				}	
+				else{
+//					fprintf(reup,"%s %s %s %d %d\n",primeiroNome,segundoNome,cidade,idade,id);
+				}
+			i=i+1;
+			aux1 = fscanf(cliente,"%s %s %s %d %d\n",&primeiroNome,&segundoNome,&cidade,&idade,&id);
+			}
+			fclose(cliente);
+			fclose(reup);
+			remove("Clientes.txt");
+			rename("Cliente.txt","Clientes.txt");
+			printf("erro");
+	}
+			break;
+		case 2:
+			quadroAtualizar();
+			printf("\t\tQual o novo sobrenome:");
+			scanf("%s",newSegundoNome);
+			break;
+		case 3:
+			quadroAtualizar();
+			printf("\t\tQual a nova cidade:");
+			scanf("%s",newCidade);
+			break;
+		case 4:
+			quadroAtualizar();
+			printf("\t\tQual a nova idade:");
+			scanf("%d",newIdade);
+			break;
+	}
 	
-
+	
 
 }
 
@@ -601,7 +655,7 @@ int main(){
 							getch();
 							break;
 						case 3:
-							
+							atualizarCliente();
 							break;
 						case 4:
 							int id;
