@@ -263,6 +263,14 @@ void quadroCadastroCliente(){
 	
 }
 
+void quadroCadastroProdutoExt(){
+	
+	printf("\t\t ________________________________________\n");
+	printf("\t\t|            Cadastro Produto            |\n");
+	printf("\t\t|                                        |\n");
+	
+}
+
 void quadroCadastroProduto(){
 	
 	printf("\t\t _____________________________\n");
@@ -392,8 +400,9 @@ void cadastroProduto(Produto novo){
 	int id,estoque;
 	float precoUnitario;
 	char nomeProduto[50];
-	quadroCadastroProduto();
-	printf("\t\tNome produto(separar_espaços_com""_""):");
+	system("cls");
+	quadroCadastroProdutoExt();
+	printf("\t\tNome produto(separar com \"_\"):");
 	scanf("%s",&nomeProduto);
 	system("cls");
 	quadroCadastroProduto();
@@ -414,6 +423,7 @@ void cadastroProduto(Produto novo){
 
 void cadastroCv(CompraVenda novo){
 	int id,idCliente,idProduto,quantidade;
+	system("cls");
 	quadroCadastroCvExt();
 	listarClientes();
 	printf("\n\t\tID do cliente efetuando a compra:");
@@ -467,7 +477,7 @@ int quadroAtualizarProdutoTal(int idProduto){
 	system("cls");
 	int opcao;
 	printf("\t\t ___________________________________________\n");
-	printf("\t\t|           Cliente %d selecionado           | \n",idCliente);
+	printf("\t\t|           Produto %d selecionado          | \n",idProduto);
 	printf("\t\t|       Selecione qual dado atualizar:      | \n");
 	printf("\t\t|                                           |\n");
 	printf("\t\t|      1- Nome                              |\n");
