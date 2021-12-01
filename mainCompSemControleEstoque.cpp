@@ -893,15 +893,6 @@ bool controleEstoque(int idProdutoCadastro,int quantidadeComprada){
 	return acesso;
 }
 
-
-void verifyCliente(){
-	int i,aux;
-}
-
-void verifyProduto(){
-	int i,aux;
-}
-
 int tabelaInicial(int opcao){
 	system("cls");
 	printf("\t\t _____________________________\n");
