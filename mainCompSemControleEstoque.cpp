@@ -51,7 +51,7 @@ Produto setProduto(int id,char nomeProduto[50],float precoUnitario,int estoque){
 	P.estoque = estoque;
 	strcpy(P.nomeProduto,nomeProduto);
 	FILE *produto;
-	produto = fopen("Produto.txt","a");
+	produto = fopen("Produtos.txt","a");
 	if(produto == NULL){
 		printf("Cadastro falhou!");
 	}else{
@@ -110,7 +110,7 @@ int idCliente(){
 
 int idProdutos(){
 	FILE *produto;
-	produto = fopen("Produto.txt","r");
+	produto = fopen("Produtos.txt","r");
 	int i,aux,id=0,estoque;
 	float precoUnitario;
 	char nomeProduto[50];
@@ -204,17 +204,17 @@ void deleteProduto(int idProdutoSelect){
 	char nomeProduto[50];
 	FILE *produto;
 	FILE *reup;
-	produto = fopen("Produto.txt","r");
-	reup = fopen("Produtos.txt","w");
+	produto = fopen("Produtos.txt","r");
+	reup = fopen("Produto.txt","w");
 	if(produto == NULL){
 		printf("Erro para atualizar arquivo");
 	}
 	else{
 		i=1;
-		aux1 = fscanf(produto,"%s %f %d %d",&nomeProduto,&precoUnitario,&estoque,&id);
+		aux1 = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&id);
 		while( aux1 != EOF){
 			if(idProdutoSelect!=i){
-				fprintf(reup,"%s %f %d %d",nomeProduto,precoUnitario,estoque,idNew);
+				fprintf(reup,"%s %f %d %d\n",nomeProduto,precoUnitario,estoque,idNew);
 			}
 			else{
 				printf("Linha deletada com sucesso!");
@@ -222,13 +222,13 @@ void deleteProduto(int idProdutoSelect){
 			}
 			idNew++;
 			i=i+1;
-			aux1 = fscanf(produto,"%s %f %d %d",&nomeProduto,&precoUnitario,&estoque,&id);
+			aux1 = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&id);
 			
 		}
 		fclose(produto);
 		fclose(reup);
-		remove("Produto.txt");
-		rename("Produtos.txt","Produto.txt");
+		remove("Produtos.txt");
+		rename("Produto.txt","Produtos.txt");
 	}
 	
 }
@@ -340,7 +340,7 @@ void listarProdutos(){
 	float preco;
 	char nomeProduto[50];
 	FILE *produto;
-	produto = fopen("Produto.txt","r");
+	produto = fopen("Produtos.txt","r");
 	if(produto== NULL){
 		printf("Erro na listagem dos clientes!");
 	}
@@ -671,28 +671,28 @@ void atualizarProduto(){
 			scanf("%s",&newNomeProduto);
 			FILE *produto1;
 			FILE *reup1;
-			produto1 = fopen("Produto.txt","r");
-			reup1 = fopen("Produtos.txt","w");
+			produto1 = fopen("Produtos.txt","r");
+			reup1 = fopen("Produto.txt","w");
 			if(produto1 == NULL){
 				printf("Erro para atualizar arquivo");
 			}
 			else{
 				i=1;
-				aux1 = fscanf(produto1,"%s %f %d %d",&nomeProduto,&precoUnitario,&estoque,&id);
+				aux1 = fscanf(produto1,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&id);
 			while( aux1 != EOF){
 				if(idProdutoSelect == i){
-					fprintf(reup1,"%s %f %d %d",newNomeProduto,precoUnitario,estoque,id);
+					fprintf(reup1,"%s %f %d %d\n",newNomeProduto,precoUnitario,estoque,id);
 				}	
 				else{
-					fprintf(reup1,"%s %f %d %d",nomeProduto,precoUnitario,estoque,id);
+					fprintf(reup1,"%s %f %d %d\n",nomeProduto,precoUnitario,estoque,id);
 				}
 			i=i+1;
-			aux1 = fscanf(produto1,"%s %f %d %d",&nomeProduto,&precoUnitario,&estoque,&id);
+			aux1 = fscanf(produto1,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&id);
 			}
 			fclose(produto1);
 			fclose(reup1);
-			remove("Produto.txt");
-			rename("Produtos.txt","Produto.txt");
+			remove("Produtos.txt");
+			rename("Produto.txt","Produtos.txt");
 	}
 			break;
 		case 2:
@@ -701,28 +701,28 @@ void atualizarProduto(){
 			scanf("%f",&newPrecoUnitario);
 			FILE *produto2;
 			FILE *reup2;
-			produto2 = fopen("Produto.txt","r");
-			reup2 = fopen("Produtos.txt","w");
+			produto2 = fopen("Produtos.txt","r");
+			reup2 = fopen("Produto.txt","w");
 			if(produto2 == NULL){
 				printf("Erro para atualizar arquivo");
 			}
 			else{
 				i=1;
-				aux1 = fscanf(produto2,"%s %f %d %d",&nomeProduto,&precoUnitario,&estoque,&id);
+				aux1 = fscanf(produto2,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&id);
 			while( aux1 != EOF){
 				if(idProdutoSelect == i){
-					fprintf(reup2,"%s %f %d %d",nomeProduto,newPrecoUnitario,estoque,id);
+					fprintf(reup2,"%s %f %d %d\n",nomeProduto,newPrecoUnitario,estoque,id);
 				}	
 				else{
-					fprintf(reup2,"%s %f %d %d",nomeProduto,precoUnitario,estoque,id);
+					fprintf(reup2,"%s %f %d %d\n",nomeProduto,precoUnitario,estoque,id);
 				}
 			i=i+1;
-			aux1 = fscanf(produto2,"%s %f %d %d",&nomeProduto,&precoUnitario,&estoque,&id);
+			aux1 = fscanf(produto2,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&id);
 			}
 			fclose(produto2);
 			fclose(reup2);
-			remove("Produto.txt");
-			rename("Produtos.txt","Produto.txt");
+			remove("Produtos.txt");
+			rename("Produto.txt","Produtos.txt");
 	}
 			break;
 		case 3:
@@ -731,28 +731,28 @@ void atualizarProduto(){
 			scanf("%d",&newEstoque);
 			FILE *produto3;
 			FILE *reup3;
-			produto3 = fopen("Produto.txt","r");
-			reup3 = fopen("Produtos.txt","w");
+			produto3 = fopen("Produtos.txt","r");
+			reup3 = fopen("Produto.txt","w");
 			if(produto3 == NULL){
 				printf("Erro para atualizar arquivo");
 			}
 			else{
 				i=1;
-				aux1 = fscanf(produto3,"%s %f %d %d",&nomeProduto,&precoUnitario,&estoque,&id);
+				aux1 = fscanf(produto3,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&id);
 			while( aux1 != EOF){
 				if(idProdutoSelect == i){
-					fprintf(reup3,"%s %f %d %d",nomeProduto,precoUnitario,newEstoque,id);
+					fprintf(reup3,"%s %f %d %d\n",nomeProduto,precoUnitario,newEstoque,id);
 				}	
 				else{
-					fprintf(reup3,"%s %f %d %d",nomeProduto,precoUnitario,estoque,id);
+					fprintf(reup3,"%s %f %d %d\n",nomeProduto,precoUnitario,estoque,id);
 				}
 			i=i+1;
-			aux1 = fscanf(produto3,"%s %f %d %d",&nomeProduto,&precoUnitario,&estoque,&id);
+			aux1 = fscanf(produto3,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&id);
 			}
 			fclose(produto3);
 			fclose(reup3);
-			remove("Produto.txt");
-			rename("Produtos.txt","Produto.txt");
+			remove("Produtos.txt");
+			rename("Produto.txt","Produtos.txt");
 			break;
 	}
 	}
@@ -860,10 +860,47 @@ void atualizarCv(){
 	}
 }
 	
-void controleEstoque(){
-	
+bool controleEstoque(int idProdutoCadastro,int quantidadeComprada){
+	int i,auxP,auxC,idCv,idProduto,estoque,idCliente;
+	float precoUnitario;
+	bool acesso;
+	char nomeProduto[50];
+	FILE *cv1;
+	FILE *produto;
+	FILE *produtochange;
+	cv1 = fopen("Vendas.txt","r");
+	produto = fopen("Produtos.txt","r");
+	produtochange = fopen("Produto.txt","w");
+	if(cv1 == NULL || produto == NULL || produtochange == NULL){
+		printf("Erro na abertura do arquivo!");
+	}
+	else{
+		i = 1;
+		auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
+		while(auxP != EOF){
+			if(idProduto == idProdutoCadastrado){
+				acesso == true;
+				
+			}
+			else{
+				auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
+				i = i+1;
+			}
+			printf("Id produto inválido!");
+			acesso == false;
+		}
+	}
+	return acesso;
 }
 
+
+void verifyCliente(){
+	int i,aux;
+}
+
+void verifyProduto(){
+	int i,aux;
+}
 
 int tabelaInicial(int opcao){
 	system("cls");
@@ -1031,9 +1068,4 @@ int main(){
 		}
 	}
 	return 0;
-	
-	
-	
-	
-	
 }
