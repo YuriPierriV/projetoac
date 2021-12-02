@@ -86,6 +86,8 @@ CompraVenda setCv(int id,int quantidade, int idCliente,int idProduto){
 	return V;
 }
 
+
+
 int idCliente(){
 	int i,aux,idade,id=0;
 	char primeiroNome[50],segundoNome[50],cidade[50];
@@ -265,6 +267,38 @@ void deleteCv(int idCvSelect){
 		rename("Venda.txt","Vendas.txt");
 	}
 	
+bool controleEstoque(int idProdutoCadastro,int quantidadeComprada){
+	int i,auxP,auxC,idCv,idProduto,estoque,idCliente;
+	float precoUnitario;
+	bool acesso;
+	char nomeProduto[50];
+	FILE *cv1;
+	FILE *produto;
+	FILE *produtochange;
+	cv1 = fopen("Vendas.txt","r");
+	produto = fopen("Produtos.txt","r");
+	produtochange = fopen("Produto.txt","w");
+	if(cv1 == NULL || produto == NULL || produtochange == NULL){
+		printf("Erro na abertura do arquivo!");
+	}
+	else{
+		i = 1;
+		auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
+		while(auxP != EOF){
+			if(idProduto == idProdutoCadastro){
+				acesso == true;
+				
+			}
+			else{
+				auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
+				i = i+1;
+			}
+			printf("Id produto inválido!");
+			acesso == false;
+		}
+	}
+	return acesso;
+}
 
 void quadroCadastroCliente(){
 	
@@ -449,7 +483,7 @@ void cadastroCv(CompraVenda novo){
 	listarProdutos();
 	printf("\n\t\tQuantidade de itens desejados:");
 	scanf("%d",&quantidade);
-	if(controleEstoque() == true){
+	if(controleEstoque(idProduto,quantidade) == true){
 		id = idCv();
 		novo = setCv(idCv(),quantidade,idCliente,idProduto);
 		quadroCadastroCv();
@@ -458,8 +492,10 @@ void cadastroCv(CompraVenda novo){
 		system("cls");
 	}
 	else{
-		
+		printf("Falha cadastro");
+		getch();
 	}
+
 }
 
 void quadroAtualizar(){
@@ -865,37 +901,15 @@ void atualizarCv(){
 	}
 }
 	
-bool controleEstoque(int idProdutoCadastro,int quantidadeComprada){
-	int i,auxP,auxC,idCv,idProduto,estoque,idCliente;
-	float precoUnitario;
-	bool acesso;
-	char nomeProduto[50];
-	FILE *cv1;
-	FILE *produto;
-	FILE *produtochange;
-	cv1 = fopen("Vendas.txt","r");
-	produto = fopen("Produtos.txt","r");
-	produtochange = fopen("Produto.txt","w");
-	if(cv1 == NULL || produto == NULL || produtochange == NULL){
-		printf("Erro na abertura do arquivo!");
-	}
-	else{
-		i = 1;
-		auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
-		while(auxP != EOF){
-			if(idProduto == idProdutoCadastrado){
-				acesso == true;
-				
-			}
-			else{
-				auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
-				i = i+1;
-			}
-			printf("Id produto inválido!");
-			acesso == false;
-		}
-	}
-	return acesso;
+
+
+
+void verifyCliente(){
+	int i,aux;
+}
+
+void verifyProduto(){
+	int i,aux;
 }
 
 int tabelaInicial(int opcao){
