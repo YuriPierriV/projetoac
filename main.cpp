@@ -267,39 +267,32 @@ void deleteCv(int idCvSelect){
 		rename("Venda.txt","Vendas.txt");
 	}
 
-bool controleCliente(int idClienteCadastro){
-	int i,auxP,auxC,idCv,idProduto,estoque,idCliente;
-	float precoUnitario;
-	bool acesso;
-	char primeiroNome[50];
-	FILE *cv1;
-	FILE *cliente;
-	FILE *produtochange;
-	cv1 = fopen("Vendas.txt","r");
-	cliente = fopen("Clientes.txt","r");
-	if(cv1 == NULL || produto == NULL || produtochange == NULL){
-		system("cls");
-		printf("Erro na abertura do arquivo!");
-		getch();
-	}
-	else{
-		i = 1;
-		auxP = fscanf(cliente,"%s %s %s %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
-		while(auxP != EOF){
-			if(idCliente == idClienteCadastro){
-				acesso == true;
-				
-			}
-			else{
-				auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
-				i = i+1;
-			}
-			system("cls");
-			printf("Id produto inválido!");
-			acesso == false;
-		}
-	}
-	return acesso;
+int controleCliente(int idClienteCadastro){
+    int i,idCliente,auxC,idade;
+    int acesso=0;
+    char primeiroNome[50], segundoNome[50], cidade[50];
+    FILE *cliente;
+    cliente = fopen("Clientes.txt","r");
+    if(cliente == NULL){
+        system("cls");
+        printf("Erro na abertura do arquivo!");
+        getch();
+    }
+    else{
+        i = 1;
+        auxC = fscanf(cliente,"%s %s %s %d %d\n",&primeiroNome,&segundoNome,&cidade,&idade,&idCliente);
+        while(auxC != EOF){
+            if(idCliente == idClienteCadastro) {
+                acesso = 1;
+            }
+            else{
+                auxC = fscanf(cliente,"%s %s %s %d %d\n",&primeiroNome,&segundoNome,&cidade,&idade,&idCliente);
+                i = i+1;
+            }
+        }
+    }
+    fclose(cliente);
+    return acesso;
 }
 
 bool controleProduto(int idProdutoCadastro){
@@ -311,7 +304,7 @@ bool controleProduto(int idProdutoCadastro){
 	FILE *produto;
 	cv1 = fopen("Vendas.txt","r");
 	produto = fopen("Produtos.txt","r");
-	if(cv1 == NULL || produto == NULL || produtochange == NULL){
+	if(cv1 == NULL || produto == NULL){
 		printf("Erro na abertura do arquivo!");
 	}
 	else{
@@ -333,6 +326,40 @@ bool controleProduto(int idProdutoCadastro){
 	}
 	return acesso;
 }
+
+//bool controleEstoque(int idProdutoCadastro,int quantidade){
+//	int i,auxP,idCv,idProduto,estoque,idCliente;
+//	float precoUnitario;
+//	bool acesso;
+//	char nomeProduto[50];
+//	FILE *cv1;
+//	FILE *produto;
+//	FILE *reupp;
+//	cv1 = fopen("Vendas.txt","r");
+//	produto = fopen("Produtos.txt","r");
+//	reupp = fopen("Produto.txt","w");
+//	if(cv1 == NULL || produto == NULL || reupp == NULL){
+//		printf("Erro na abertura do arquivo!");
+//	}
+//	else{
+//		i = 1;
+//		auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&id);
+//		while(auxP != EOF){
+//			if(idProduto == idProdutoCadastro){
+//				
+//				
+//			}
+//			else{
+//				auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
+//				i = i+1;
+//			}
+//			system("cls");
+//			printf("Id produto inválido!");
+//			acesso == false;
+//		}
+//	}
+//	return acesso;
+//}
 
 void quadroCadastroCliente(){
 	
@@ -510,37 +537,46 @@ void cadastroCv(CompraVenda novo){
 	printf("\n\t\tID do cliente efetuando a compra:");
 	scanf("%d",&idCliente);
 	system("cls");
-	quadroCadastroCvExt();
-	listarProdutos();
-	printf("\n\t\tID do produto comprado:");
-	scanf("%d",&idProduto);
-	system("cls");
-	if(controleProduto(idProduto) == true){
-		id = idCv();
-		novo = setCv(idCv(),quantidade,idCliente,idProduto);
-		quadroCadastroCv();
-		printf("\t\tVenda id=%d cadastrada",id);
-		getch();
+	if(controleCliente(idCliente) == 1){
+		quadroCadastroCvExt();
+		listarProdutos();
+		printf("\n\t\tID do produto comprado:");
+		scanf("%d",&idProduto);
 		system("cls");
+		if(controleProduto(idProduto) == 1){
+			id = idCv();
+			novo = setCv(idCv(),quantidade,idCliente,idProduto);
+			quadroCadastroCv();
+			printf("\t\tVenda id=%d cadastrada",id);
+			getch();
+			system("cls");
+			quadroCadastroCvExt();
+			listarProdutos();
+			printf("\n\t\tQuantidade de itens desejados:");
+			scanf("%d",&quantidade);
+			id = idCv();
+			novo = setCv(idCv(),quantidade,idCliente,idProduto);
+			quadroCadastroCv();
+			printf("\t\tVenda id=%d cadastrada",id);
+		}
+		else{
+			system("cls");
+			printf("ID produto invalido!");
+			getch();
+		}
 	}
 	else{
-		system("cls");
-		printf("ID produto invalido!");
-		getch();
+			system("cls");
+			printf("ID Cliente invalido!");
+			getch();
+		}	
+	
 	}
-	quadroCadastroCvExt();
-	listarProdutos();
-	printf("\n\t\tQuantidade de itens desejados:");
-	scanf("%d",&quantidade);
-	id = idCv();
-	novo = setCv(idCv(),quantidade,idCliente,idProduto);
-	quadroCadastroCv();
-	printf("\t\tVenda id=%d cadastrada",id);
+	
 
 
 
 
-}
 
 void quadroAtualizar(){
 	printf("\t\t _____________________________________________________________\n");
@@ -949,13 +985,7 @@ void atualizarCv(){
 
 
 
-void verifyCliente(){
-	int i,aux;
-}
 
-void verifyProduto(){
-	int i,aux;
-}
 
 int tabelaInicial(int opcao){
 	system("cls");
