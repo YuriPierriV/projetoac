@@ -350,7 +350,7 @@ void listarProdutos(){
 		while(aux!= EOF){
 			i = i+1;
 			printf("\t\t|_____________________________________________________________|\n");
-			printf("\t\t|Produto=%s | Preço(R$)=%.2f | Estoque=%d | ID=%d|\n",nomeProduto,preco,quantidade,id);
+			printf("\t\t|Produto=%s | PreÃ§o(R$)=%.2f | Estoque=%d | ID=%d|\n",nomeProduto,preco,quantidade,id);
 			printf("\t\t|_____________________________________________________________|\n");
 			aux = fscanf(produto,"%s %f %d %d",&nomeProduto,&preco,&quantidade,&id);
 			}
@@ -417,7 +417,7 @@ void cadastroProduto(Produto novo){
 	scanf("%s",&nomeProduto);
 	system("cls");
 	quadroCadastroProduto();
-	printf("\t\tPreço do produto:");
+	printf("\t\tPreÃ§o do produto:");
 	scanf("%f",&precoUnitario);
 	system("cls");
 	quadroCadastroProduto();
@@ -449,12 +449,17 @@ void cadastroCv(CompraVenda novo){
 	listarProdutos();
 	printf("\n\t\tQuantidade de itens desejados:");
 	scanf("%d",&quantidade);
-	id = idCv();
-	novo = setCv(idCv(),quantidade,idCliente,idProduto);
-	quadroCadastroCv();
-	printf("\t\tVenda id=%d cadastrada",id);
-	getch();
-	system("cls");
+	if(controleEstoque() == true){
+		id = idCv();
+		novo = setCv(idCv(),quantidade,idCliente,idProduto);
+		quadroCadastroCv();
+		printf("\t\tVenda id=%d cadastrada",id);
+		getch();
+		system("cls");
+	}
+	else{
+		
+	}
 }
 
 void quadroAtualizar(){
@@ -477,7 +482,7 @@ int quadroAtualizarClienteTal(int idCliente){
 	printf("\t\t|                                           |\n"); 
 	printf("\t\t|      4- Idade                             |\n");  
 	printf("\t\t|                                           |\n");
-	printf("\t\t|               Opção:");
+	printf("\t\t|               OpÃ§Ã£o:");
 	scanf("%d",&opcao);
 	return opcao;
 	
@@ -492,11 +497,11 @@ int quadroAtualizarProdutoTal(int idProduto){
 	printf("\t\t|                                           |\n");
 	printf("\t\t|      1- Nome Produto                      |\n");
 	printf("\t\t|                                           |\n");
-	printf("\t\t|      2- Preço Unitario                    |\n");
+	printf("\t\t|      2- PreÃ§o Unitario                    |\n");
 	printf("\t\t|                                           |\n");
 	printf("\t\t|      3- Estoque                           |\n");
 	printf("\t\t|                                           |\n");
-	printf("\t\t|               Opção:");
+	printf("\t\t|               OpÃ§Ã£o:");
 	scanf("%d",&opcao);
 	return opcao;
 	
@@ -515,7 +520,7 @@ int quadroAtualizarCvTal(int idCv){
 	printf("\t\t|                                           |\n");
 	printf("\t\t|      3- Quantidade                        |\n");
 	printf("\t\t|                                           |\n");
-	printf("\t\t|               Opção:");
+	printf("\t\t|               OpÃ§Ã£o:");
 	scanf("%d",&opcao);
 	return opcao;
 	
@@ -697,7 +702,7 @@ void atualizarProduto(){
 			break;
 		case 2:
 			quadroAtualizar();
-			printf("\t\tQual o novo preço:");
+			printf("\t\tQual o novo preÃ§o:");
 			scanf("%f",&newPrecoUnitario);
 			FILE *produto2;
 			FILE *reup2;
@@ -886,7 +891,7 @@ bool controleEstoque(int idProdutoCadastro,int quantidadeComprada){
 				auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
 				i = i+1;
 			}
-			printf("Id produto inválido!");
+			printf("Id produto invÃ¡lido!");
 			acesso == false;
 		}
 	}
@@ -906,7 +911,7 @@ int tabelaInicial(int opcao){
 	printf("\t\t|                             |\n");
 	printf("\t\t|   4  ->  Fechar sistema     |\n");
 	printf("\t\t|                             |\n");
-	printf("\t\t|           Opção: ");
+	printf("\t\t|           OpÃ§Ã£o: ");
 	scanf("%d",&opcao);
 	system("cls");
 	return opcao;
@@ -927,7 +932,7 @@ int subTabelaCliente(int opcao){
 	printf("\t\t|                             |\n");
 	printf("\t\t|   5  ->    Voltar Menu      |\n");
 	printf("\t\t|                             |\n");
-	printf("\t\t|           Opção: ");
+	printf("\t\t|           OpÃ§Ã£o: ");
 	scanf("%d",&opcao);
 	return opcao;
 };
@@ -947,7 +952,7 @@ int subTabelaProdutos(int opcao){
 	printf("\t\t|                             |\n");
 	printf("\t\t|   5  ->    Voltar Menu      |\n");
 	printf("\t\t|                             |\n");
-	printf("\t\t|           Opção: ");
+	printf("\t\t|           OpÃ§Ã£o: ");
 	scanf("%d",&opcao);
 	return opcao;
 };
@@ -967,7 +972,7 @@ int subTabelaCp(int opcao){
 	printf("\t\t|                             |\n");
 	printf("\t\t|   5  ->    Voltar Menu      |\n");
 	printf("\t\t|                             |\n");
-	printf("\t\t|           Opção: ");
+	printf("\t\t|           OpÃ§Ã£o: ");
 	scanf("%d",&opcao);
 	return opcao;
 	
