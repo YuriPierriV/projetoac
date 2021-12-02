@@ -266,18 +266,51 @@ void deleteCv(int idCvSelect){
 		remove("Vendas.txt");
 		rename("Venda.txt","Vendas.txt");
 	}
-	
-bool controleEstoque(int idProdutoCadastro,int quantidadeComprada){
+
+bool controleCliente(int idClienteCadastro){
+	int i,auxP,auxC,idCv,idProduto,estoque,idCliente;
+	float precoUnitario;
+	bool acesso;
+	char primeiroNome[50];
+	FILE *cv1;
+	FILE *cliente;
+	FILE *produtochange;
+	cv1 = fopen("Vendas.txt","r");
+	cliente = fopen("Clientes.txt","r");
+	if(cv1 == NULL || produto == NULL || produtochange == NULL){
+		system("cls");
+		printf("Erro na abertura do arquivo!");
+		getch();
+	}
+	else{
+		i = 1;
+		auxP = fscanf(cliente,"%s %s %s %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
+		while(auxP != EOF){
+			if(idCliente == idClienteCadastro){
+				acesso == true;
+				
+			}
+			else{
+				auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
+				i = i+1;
+			}
+			system("cls");
+			printf("Id produto inválido!");
+			acesso == false;
+		}
+	}
+	return acesso;
+}
+
+bool controleProduto(int idProdutoCadastro){
 	int i,auxP,auxC,idCv,idProduto,estoque,idCliente;
 	float precoUnitario;
 	bool acesso;
 	char nomeProduto[50];
 	FILE *cv1;
 	FILE *produto;
-	FILE *produtochange;
 	cv1 = fopen("Vendas.txt","r");
 	produto = fopen("Produtos.txt","r");
-	produtochange = fopen("Produto.txt","w");
 	if(cv1 == NULL || produto == NULL || produtochange == NULL){
 		printf("Erro na abertura do arquivo!");
 	}
@@ -293,6 +326,7 @@ bool controleEstoque(int idProdutoCadastro,int quantidadeComprada){
 				auxP = fscanf(produto,"%s %f %d %d\n",&nomeProduto,&precoUnitario,&estoque,&idProduto);
 				i = i+1;
 			}
+			system("cls");
 			printf("Id produto inválido!");
 			acesso == false;
 		}
@@ -370,6 +404,7 @@ void listarClientes(){
 	};
 
 void listarProdutos(){
+	setlocale(LC_ALL,"");
 	int i,id,quantidade,aux;
 	float preco;
 	char nomeProduto[50];
@@ -442,6 +477,7 @@ void cadastroCliente(Cliente novo){
 	}
 
 void cadastroProduto(Produto novo){
+	setlocale(LC_ALL,"Portuguese");
 	int id,estoque;
 	float precoUnitario;
 	char nomeProduto[50];
@@ -479,11 +515,7 @@ void cadastroCv(CompraVenda novo){
 	printf("\n\t\tID do produto comprado:");
 	scanf("%d",&idProduto);
 	system("cls");
-	quadroCadastroCvExt();
-	listarProdutos();
-	printf("\n\t\tQuantidade de itens desejados:");
-	scanf("%d",&quantidade);
-	if(controleEstoque(idProduto,quantidade) == true){
+	if(controleProduto(idProduto) == true){
 		id = idCv();
 		novo = setCv(idCv(),quantidade,idCliente,idProduto);
 		quadroCadastroCv();
@@ -492,9 +524,21 @@ void cadastroCv(CompraVenda novo){
 		system("cls");
 	}
 	else{
-		printf("Falha cadastro");
+		system("cls");
+		printf("ID produto invalido!");
 		getch();
 	}
+	quadroCadastroCvExt();
+	listarProdutos();
+	printf("\n\t\tQuantidade de itens desejados:");
+	scanf("%d",&quantidade);
+	id = idCv();
+	novo = setCv(idCv(),quantidade,idCliente,idProduto);
+	quadroCadastroCv();
+	printf("\t\tVenda id=%d cadastrada",id);
+
+
+
 
 }
 
@@ -801,6 +845,7 @@ void atualizarProduto(){
 	
 void atualizarCv(){
 	int id,opcao,idCvSelect,quantidade,newQuantidade,aux1,i,idCliente,newIdCliente,idProduto,newIdProduto;
+	setlocale(LC_ALL,"Portuguese");
 	system("cls");
 	quadroAtualizar();
 	listarCv();
